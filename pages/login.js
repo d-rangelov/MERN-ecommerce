@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Icon, Message, Segment } from "semantic-ui-react";
+import axios from "axios";
 import Link from "next/link";
 import catchErrors from "../utils/catchErrors";
+import baseUrl from "../utils/baseUrl";
+import { handleAuth, handleLogin } from "../utils/auth";
 
 const INITIAL_USER = {
   email: "",
@@ -32,9 +35,10 @@ function Signup() {
     try {
       setLoading(true);
       setError("");
-      console.log(user);
-
-      //Make a request to sign up user
+      const url = `${baseUrl}/api/login`;
+      const payload = { ...user };
+      const response = await axios.post(url, payload);
+      handleLogin(response.data);
     } catch (error) {
       catchErrors(error, setError);
     } finally {
@@ -78,7 +82,7 @@ function Signup() {
           />
 
           <Button
-            icon="sing in"
+            icon="sign in"
             type="submit"
             color="orange"
             content="Login"

@@ -6,7 +6,7 @@ function CartItemList() {
   return (
     <Segment secondary color="teal" inverted textAlign="center" placeholder>
       <Header icon>
-        <Icon name="shopping basekt" />
+        <Icon name="shopping basket" />
         No products in your cart. Add some!
       </Header>
       <div>
