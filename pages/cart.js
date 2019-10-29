@@ -5,18 +5,17 @@ import { parseCookies } from "nookies";
 import axios from "axios";
 import baseUrl from "../utils/baseUrl";
 
-function Cart({ products }) {
+function Cart({ products, user }) {
+  console.log(products);
   return (
     <Segment>
-      <CartItemList />
-      <CartSummary />
+      <CartItemList user={user} products={products} />
+      <CartSummary products={products} />
     </Segment>
   );
 }
 
 Cart.getInitialProps = async ctx => {
-  console.log("I AM IN THE CART");
-
   const { token } = parseCookies(ctx);
   if (!token) {
     return { products: [] };
